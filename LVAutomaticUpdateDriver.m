@@ -43,6 +43,7 @@
     }
 }
 
+// Override the newer Sparkle DSA/Code-signing requirement. If our SSL cert is compromised, we've got bigger problems.
 - (BOOL)validateUpdateDownloadedToPath:(NSString *)downloadedPath extractedToPath:(NSString *)extractedPath DSASignature:(NSString *)DSASignature publicDSAKey:(NSString *)publicDSAKey
 {
     return [[updateItem.fileURL scheme] isEqualToString:@"https"] && [[appcastURL scheme] isEqualToString:@"https"];
