@@ -20,7 +20,7 @@ You need to implement the `LVUpdateActivityProtocol`, like so:
 
 // MyChecker.m
 static const NSTimeInterval kUpdateCheckFrequency = 5 * 60;
-@implementation
+@implementation MyChecker
 - (NSDate *)lastActivity
 {
     return _lastActivity; // NSDate of the last user-performed action.
