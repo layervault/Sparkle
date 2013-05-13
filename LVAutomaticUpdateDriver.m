@@ -22,7 +22,7 @@
 - (void)performUpdateIfInactive
 {
     SEL lastActivitySelector = sel_registerName("lastActivity");
-    if (!updater.delegate || ![updater.delegate respondsToSelector:lastActivitySelector])
+    if (![updater.delegate respondsToSelector:lastActivitySelector])
         return;
 
     NSDate *lastActiveDate = [updater.delegate performSelector:lastActivitySelector];
@@ -35,7 +35,7 @@
 - (NSDate *)timeAgoThreshold
 {
     SEL updateThresholdSelector = sel_registerName("updateThreshold");
-    if (updater.delegate && [updater.delegate respondsToSelector:updateThresholdSelector]) {
+    if ([updater.delegate respondsToSelector:updateThresholdSelector]) {
         return [[NSDate date] dateByAddingTimeInterval:-1 * (int)[updater.delegate performSelector:updateThresholdSelector]];
     }
     else {
