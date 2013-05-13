@@ -296,12 +296,17 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 
 - (IBAction)checkForUpdates: (id)sender
 {
-	[self checkForUpdatesWithDriver:[[[LVAutomaticUpdateDriver alloc] initWithUpdater:self] autorelease]];
+	[self checkForUpdatesWithDriver:[[[SUAutomaticUpdateDriver alloc] initWithUpdater:self] autorelease]];
 }
 
 - (void)checkForUpdateInformation
 {
 	[self checkForUpdatesWithDriver:[[[SUProbingUpdateDriver alloc] initWithUpdater:self] autorelease]];
+}
+
+- (void)checkForUpdatesAndInstallAutomatically:(id)sender
+{
+    [self checkForUpdatesWithDriver:[[[LVAutomaticUpdateDriver alloc] initWithUpdater:self] autorelease]];
 }
 
 - (void)checkForUpdatesWithDriver:(SUUpdateDriver *)d
