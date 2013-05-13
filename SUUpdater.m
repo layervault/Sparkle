@@ -20,6 +20,7 @@
 #import "SUCodeSigningVerifier.h"
 #include <SystemConfiguration/SystemConfiguration.h>
 
+#import "LVAutomaticUpdateDriver.h"
 
 @interface SUUpdater (Private)
 - (id)initForBundle:(NSBundle *)bundle;
@@ -295,7 +296,7 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 
 - (IBAction)checkForUpdates: (id)sender
 {
-	[self checkForUpdatesWithDriver:[[[SUUserInitiatedUpdateDriver alloc] initWithUpdater:self] autorelease]];
+	[self checkForUpdatesWithDriver:[[[LVAutomaticUpdateDriver alloc] initWithUpdater:self] autorelease]];
 }
 
 - (void)checkForUpdateInformation
