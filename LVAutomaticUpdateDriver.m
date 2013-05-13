@@ -26,13 +26,22 @@
         return;
 
     NSDate *lastActiveDate = [updater.delegate performSelector:lastActivitySelector];
-    if ([lastActiveDate compare:[self fiveMinutesAgo]] == NSOrderedAscending)
+
+    // Make sure something hasn't happened between the time we asked for an update and we unarchived the update.
+    if (lastActiveDate && [lastActiveDate compare:[self timeAgoThreshold]] == NSOrderedAscending)
         [self installWithToolAndRelaunch:YES];
 }
 
-- (NSDate *)fiveMinutesAgo
+- (NSDate *)timeAgoThreshold
 {
-    return [[NSDate date] dateByAddingTimeInterval:-1 * 5 * 60];
+    SEL updateThresholdSelector = sel_registerName("updateThreshold");
+    if (updater.delegate && [updater.delegate respondsToSelector:updateThresholdSelector]) {
+        return [[NSDate date] dateByAddingTimeInterval:-1 * (int)[updater.delegate performSelector:updateThresholdSelector]];
+    }
+    else {
+        return [[NSDate date] dateByAddingTimeInterval:-1 * 5 * 60];
+    }
 }
+
 
 @end
