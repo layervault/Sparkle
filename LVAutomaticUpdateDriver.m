@@ -1,9 +1,9 @@
 //
-//  SUAutomaticUpdateDriver.m
+//  LVAutomaticUpdateDriver.m
 //  Sparkle
 //
-//  Created by Andy Matuschak on 5/6/08.
-//  Copyright 2008 Andy Matuschak. All rights reserved.
+//  Created by Kelly Sutton on 5/13/13.
+//  Copyright 2013 Kelly Sutton. All rights reserved.
 //
 
 #import "LVAutomaticUpdateDriver.h"
