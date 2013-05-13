@@ -1,40 +1,76 @@
-# Sparkle 
-is an easy-to-use software update framework for Cocoa developers.
+# Auto Sparkle 
+is an easy-to-use software update framework for Cocoa developers with silent updates.
 
-* True self-updating--no work required from the user.
+This is a fork of [Andy Matuschak's Sparkle framework](https://github.com/andymatuschak/Sparkle) with one important difference: it 
+allows for automatic, silent updates. For an application like [LayerVault](https://layervault.com), we have the app update during 
+periods of inactivity. For system toolbar apps, this is some great behavior.
 
-* Displays release notes to the user via WebKit.
+Please see the original Sparkle framework for instructions on getting Sparkle setup for your project.
 
-* Displays a detailed progress window to the user.
+Let's talk about setting up Auto Sparkle.
 
-* Supports authentication for installing in secure locations.
+## Setup
 
-* Really, really easy to install.
+You need to implement the `LVUpdateActivityProtocol`, like so:
 
-* Uses appcasts for release information.
+```Objective-C
+// MyChecker.h
+@class MyChecker : NSObject<LVUpdateActivityProtocol>
+@end
 
-* The user can choose to automatically download and install all updates.
+// MyChecker.m
+static const NSTimeInterval kUpdateCheckFrequency = 5 * 60;
+@implementation
+- (NSDate *)lastActivity
+{
+    return _lastActivity; // NSDate of the last user-performed action.
+}
 
-* Seamless integration—there's no mention of Sparkle; your icons and app name are used.
+- (NSTimeInterval)updateThreshold
+{
+    return kUpdateCheckFrequency;
+}
+@end 
+```
 
-* Supports DSA signatures for ultra-secure updates.
+Next up, it's up to you to call `checkForUpdatesAndInstallAutomatically:` as you please. Here's how we do it:
 
-* Sparkle requires no code in your app, so it's trivial to upgrade or remove the module.
+```Objective-C
+// AppDelegate.m
+- (void)applicationDidFinishLaunching:(NSNotification *)note
+{
+    [self resetActivityTimer];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(resetActivityTimer)
+                                                 name:@"LVActivityReceived"
+                                               object:nil];
+}
 
-## New in Sparkle 1.5:
+- (void)resetActivityTimer
+{
+    _lastActivity = [NSDate date];
+    if (_lastActivityTimer) {
+        [_lastActivityTimer invalidate];
+        _lastActivityTimer = nil;
+    }
+    
+    _lastActivityTimer = [NSTimer scheduledTimerWithTimeInterval:kUpdateCheckFrequency
+                                                          target:self
+                                                        selector:@selector(checkForUpdates)
+                                                        userInfo:nil
+                                                         repeats:NO];
+}
 
-* Optionally sends user demographic information to the server when checking for updates.
+- (void)checkForUpdates
+{
+    [[SUUpdater sharedUpdater] checkForUpdatesAndInstallAutomatically:self];
+}
+```
 
-* Dual-mode garbage collection support for any memory management style.
+Boom. `checkForUpdatesAndInstallAutomatically` initializes a new `LVAutomaticUpdateDriver` instance and lets that do the heavy lifting.
+If an update it found, it performs a check to make sure the user hasn't done anything while we were downloading and 
+unpacking the update. If we're still in the clear, the new version of the application gets installed.
 
-* Sparkle doesn't bug the user until second launch for better first impressions.
+You should [take a look the source for `LVAutomaticUpdateDriver.m`](https://github.com/layervault/Sparkle/blob/master/LVAutomaticUpdateDriver.m).
 
-* Sparkle can install .pkg files for more complicated products.
-
-* Supports bundles, preference panes, plugins, and other non-.app software.
-
-* Supports branches due to minimum OS version requirements.
-
-* Deep delegate support to make Sparkle work exactly as you need.
-
-* Tons of other stuff! [Read more about what's new.](http://andymatuschak.org/articles/2008/05/31/sparkle-15b1-now-available/ "Sparkle 1.5b1: now available!")
+Enjoy!
