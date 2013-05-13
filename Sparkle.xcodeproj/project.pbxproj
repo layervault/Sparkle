@@ -138,6 +138,7 @@
 		93FB277F156BD826001937C7 /* SUPasswordPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93FB277D156BD826001937C7 /* SUPasswordPrompt.xib */; };
 		A245BDF017418C01005EAA94 /* LVAutomaticUpdateDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = A245BDEE17418C01005EAA94 /* LVAutomaticUpdateDriver.h */; };
 		A245BDF117418C01005EAA94 /* LVAutomaticUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = A245BDEF17418C01005EAA94 /* LVAutomaticUpdateDriver.m */; };
+		A245BDF4174197BC005EAA94 /* LVUpdateActivityProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A245BDF3174197BC005EAA94 /* LVUpdateActivityProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -406,6 +407,7 @@
 		93FB277E156BD826001937C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SUPasswordPrompt.xib; sourceTree = "<group>"; };
 		A245BDEE17418C01005EAA94 /* LVAutomaticUpdateDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVAutomaticUpdateDriver.h; sourceTree = "<group>"; };
 		A245BDEF17418C01005EAA94 /* LVAutomaticUpdateDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVAutomaticUpdateDriver.m; sourceTree = "<group>"; };
+		A245BDF3174197BC005EAA94 /* LVUpdateActivityProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVUpdateActivityProtocol.h; sourceTree = "<group>"; };
 		FA1941CA0D94A70100DD942E /* ConfigFrameworkDebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ConfigFrameworkDebug.xcconfig; sourceTree = "<group>"; };
 		FA1941CB0D94A70100DD942E /* ConfigTestAppDebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ConfigTestAppDebug.xcconfig; sourceTree = "<group>"; };
 		FA1941CC0D94A70100DD942E /* ConfigCommonRelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ConfigCommonRelease.xcconfig; sourceTree = "<group>"; };
@@ -714,6 +716,7 @@
 				6101347A0DD2541A0049ACDF /* SUProbingUpdateDriver.m */,
 				61A354530DF113C70076ECB1 /* SUUserInitiatedUpdateDriver.h */,
 				61A354540DF113C70076ECB1 /* SUUserInitiatedUpdateDriver.m */,
+				A245BDF3174197BC005EAA94 /* LVUpdateActivityProtocol.h */,
 			);
 			name = Drivers;
 			sourceTree = "<group>";
@@ -807,6 +810,7 @@
 				93FB277A156BD80D001937C7 /* SUPasswordPrompt.h in Headers */,
 				61B078CE15A5FB6100600039 /* SUCodeSigningVerifier.h in Headers */,
 				A245BDF017418C01005EAA94 /* LVAutomaticUpdateDriver.h in Headers */,
+				A245BDF4174197BC005EAA94 /* LVUpdateActivityProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
