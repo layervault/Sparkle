@@ -296,7 +296,7 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 
 - (IBAction)checkForUpdates: (id)sender
 {
-	[self checkForUpdatesWithDriver:[[[SUAutomaticUpdateDriver alloc] initWithUpdater:self] autorelease]];
+	[self checkForUpdatesWithDriver:[[[SUUserInitiatedUpdateDriver alloc] initWithUpdater:self] autorelease]];
 }
 
 - (void)checkForUpdateInformation
