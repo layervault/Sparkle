@@ -1,4 +1,4 @@
-# Auto Sparkle 
+# AutoSparkle 
 is an easy-to-use software update framework for Cocoa developers with silent updates.
 
 This is a fork of [Andy Matuschak's Sparkle framework](https://github.com/andymatuschak/Sparkle) with one important difference: it 
@@ -7,7 +7,7 @@ periods of inactivity. For system toolbar apps, this is some great behavior.
 
 Please see the original Sparkle framework for instructions on getting Sparkle setup for your project.
 
-Let's talk about setting up Auto Sparkle.
+Let's talk about setting up AutoSparkle.
 
 ## Setup
 
