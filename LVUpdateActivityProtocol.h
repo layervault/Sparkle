@@ -29,4 +29,12 @@
  */
 - (NSTimeInterval)updateThreshold;
 
+
+/**
+ *	If the update fails, report to the delegate
+ *
+ *	@param	error	The error returned when update failed.
+ */
+- (void)updateFailedWithError:(NSError *)error;
+
 @end
