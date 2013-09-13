@@ -11,6 +11,7 @@
 #import "SUAutomaticUpdateAlert.h"
 #import "SUHost.h"
 #import "SUConstants.h"
+#import "LVUpdateActivityProtocol.h"
 
 @implementation LVAutomaticUpdateDriver
 
@@ -49,5 +50,14 @@
     return [[updateItem.fileURL scheme] isEqualToString:@"https"] && [[appcastURL scheme] isEqualToString:@"https"];
 }
 
+
+- (void)abortUpdateWithError:(NSError *)error
+{
+    [super abortUpdateWithError:error];
+    if ([updater.delegate conformsToProtocol:@protocol(LVUpdateActivityProtocol)]) {
+        id<LVUpdateActivityProtocol> updaterDelegate = (id<LVUpdateActivityProtocol>)updater.delegate;
+        [updaterDelegate updateFailedWithError:error];
+    }
+}
 
 @end
