@@ -11,6 +11,7 @@
 #import "SUAutomaticUpdateAlert.h"
 #import "SUHost.h"
 #import "SUConstants.h"
+#import "LVUpdateActivityProtocol.h"
 
 @implementation LVAutomaticUpdateDriver
 
@@ -21,22 +22,22 @@
 
 - (void)performUpdateIfInactive
 {
-    SEL lastActivitySelector = sel_registerName("lastActivity");
-    if (![updater.delegate respondsToSelector:lastActivitySelector])
-        return;
+    if ([updater.delegate conformsToProtocol:@protocol(LVUpdateActivityProtocol)]) {
+        id<LVUpdateActivityProtocol> updaterDelegate = (id<LVUpdateActivityProtocol>)updater.delegate;
+        NSDate *lastActiveDate = [updaterDelegate lastActivity];
 
-    NSDate *lastActiveDate = [updater.delegate performSelector:lastActivitySelector];
-
-    // Make sure something hasn't happened between the time we asked for an update and we unarchived the update.
-    if (lastActiveDate && [lastActiveDate compare:[self timeAgoThreshold]] == NSOrderedAscending)
-        [self installWithToolAndRelaunch:YES];
+        // Make sure something hasn't happened between the time we asked for an update and we unarchived the update.
+        if (lastActiveDate && [lastActiveDate compare:[self timeAgoThreshold]] == NSOrderedAscending) {
+            [self installWithToolAndRelaunch:YES];
+        }
+    }
 }
 
 - (NSDate *)timeAgoThreshold
 {
-    SEL updateThresholdSelector = sel_registerName("updateThreshold");
-    if ([updater.delegate respondsToSelector:updateThresholdSelector]) {
-        return [[NSDate date] dateByAddingTimeInterval:-1 * (int)[updater.delegate performSelector:updateThresholdSelector]];
+    if ([updater.delegate conformsToProtocol:@protocol(LVUpdateActivityProtocol)]) {
+        id<LVUpdateActivityProtocol> updaterDelegate = (id<LVUpdateActivityProtocol>)updater.delegate;
+        return [[NSDate date] dateByAddingTimeInterval:-1 * (int)[updaterDelegate updateThreshold]];
     }
     else {
         return [[NSDate date] dateByAddingTimeInterval:-1 * 5 * 60];
@@ -49,5 +50,14 @@
     return [[updateItem.fileURL scheme] isEqualToString:@"https"] && [[appcastURL scheme] isEqualToString:@"https"];
 }
 
+
+- (void)abortUpdateWithError:(NSError *)error
+{
+    [super abortUpdateWithError:error];
+    if ([updater.delegate conformsToProtocol:@protocol(LVUpdateActivityProtocol)]) {
+        id<LVUpdateActivityProtocol> updaterDelegate = (id<LVUpdateActivityProtocol>)updater.delegate;
+        [updaterDelegate updateFailedWithError:error];
+    }
+}
 
 @end
