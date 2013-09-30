@@ -17,31 +17,7 @@
 
 - (void)unarchiverDidFinish:(SUUnarchiver *)ua
 {
-    [self performUpdateIfInactive];
-}
-
-- (void)performUpdateIfInactive
-{
-    if ([updater.delegate conformsToProtocol:@protocol(LVUpdateActivityProtocol)]) {
-        id<LVUpdateActivityProtocol> updaterDelegate = (id<LVUpdateActivityProtocol>)updater.delegate;
-        NSDate *lastActiveDate = [updaterDelegate lastActivity];
-
-        // Make sure something hasn't happened between the time we asked for an update and we unarchived the update.
-        if (lastActiveDate && [lastActiveDate compare:[self timeAgoThreshold]] == NSOrderedAscending) {
-            [self installWithToolAndRelaunch:YES];
-        }
-    }
-}
-
-- (NSDate *)timeAgoThreshold
-{
-    if ([updater.delegate conformsToProtocol:@protocol(LVUpdateActivityProtocol)]) {
-        id<LVUpdateActivityProtocol> updaterDelegate = (id<LVUpdateActivityProtocol>)updater.delegate;
-        return [[NSDate date] dateByAddingTimeInterval:-1 * (int)[updaterDelegate updateThreshold]];
-    }
-    else {
-        return [[NSDate date] dateByAddingTimeInterval:-1 * 5 * 60];
-    }
+    [self installWithToolAndRelaunch:YES];
 }
 
 // Override the newer Sparkle DSA/Code-signing requirement. If our SSL cert is compromised, we've got bigger problems.
