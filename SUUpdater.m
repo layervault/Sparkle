@@ -39,6 +39,7 @@
 @end
 
 @implementation SUUpdater
+@synthesize driver = driver;
 
 #pragma mark Initialization
 

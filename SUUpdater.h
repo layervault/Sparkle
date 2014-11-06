@@ -25,6 +25,8 @@
 	IBOutlet id delegate;
 }
 
+@property (readonly) SUUpdateDriver *driver;
+
 + (SUUpdater *)sharedUpdater;
 + (SUUpdater *)updaterForBundle:(NSBundle *)bundle;
 - (id)initForBundle:(NSBundle *)bundle;
