@@ -52,7 +52,7 @@
 		5D1AF5900FD767AD0065DB48 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1AF58F0FD767AD0065DB48 /* libxml2.dylib */; };
 		5D1AF59A0FD767E50065DB48 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1AF5990FD767E50065DB48 /* libz.dylib */; };
 		5D1AF82B0FD768180065DB48 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1AF5990FD767E50065DB48 /* libz.dylib */; };
-		610134730DD250470049ACDF /* SUUpdateDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 610134710DD250470049ACDF /* SUUpdateDriver.h */; settings = {ATTRIBUTES = (); }; };
+		610134730DD250470049ACDF /* SUUpdateDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 610134710DD250470049ACDF /* SUUpdateDriver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		610134740DD250470049ACDF /* SUUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 610134720DD250470049ACDF /* SUUpdateDriver.m */; };
 		6101347B0DD2541A0049ACDF /* SUProbingUpdateDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 610134790DD2541A0049ACDF /* SUProbingUpdateDriver.h */; settings = {ATTRIBUTES = (); }; };
 		6101347C0DD2541A0049ACDF /* SUProbingUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 6101347A0DD2541A0049ACDF /* SUProbingUpdateDriver.m */; };
@@ -769,6 +769,7 @@
 				61B5FC7009C51F4A00B25A18 /* SUAppcastItem.h in Headers */,
 				61B5FCDF09C52A9F00B25A18 /* SUUpdateAlert.h in Headers */,
 				6196CFF909C72148000DC222 /* SUStatusController.h in Headers */,
+				610134730DD250470049ACDF /* SUUpdateDriver.h in Headers */,
 				61299A2F09CA2DAB00B7442F /* SUDSAVerifier.h in Headers */,
 				61299A4A09CA2DD000B7442F /* SUPlainInstallerInternals.h in Headers */,
 				61299A5C09CA6D4500B7442F /* SUConstants.h in Headers */,
@@ -788,7 +789,6 @@
 				61B93A3C0DD02D7000DCD2F8 /* SUUIBasedUpdateDriver.h in Headers */,
 				61B93B270DD0FDD300DCD2F8 /* SUAutomaticUpdateDriver.h in Headers */,
 				61B93C090DD112FF00DCD2F8 /* SUScheduledUpdateDriver.h in Headers */,
-				610134730DD250470049ACDF /* SUUpdateDriver.h in Headers */,
 				6101347B0DD2541A0049ACDF /* SUProbingUpdateDriver.h in Headers */,
 				61699BCC0DDB92BD005878A4 /* SUVersionComparisonTest.h in Headers */,
 				61A354550DF113C70076ECB1 /* SUUserInitiatedUpdateDriver.h in Headers */,
@@ -864,7 +864,7 @@
 			name = "Sparkle Unit Tests";
 			productName = "Sparkle Unit Tests";
 			productReference = 612279D90DB5470200AB99EA /* Sparkle Unit Tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		61B5F90109C4CEE200B25A18 /* Sparkle Test App */ = {
 			isa = PBXNativeTarget;
